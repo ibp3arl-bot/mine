@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pac-Man</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Pac-Man</h1>
+        <p>Utilisez les flèches pour déplacer Pac-Man.</p>
+      </header>
+      <div class="stage">
+        <canvas id="game" width="520" height="360" aria-label="Terrain Pac-Man"></canvas>
+        <div id="overlay" class="overlay" role="status">
+          <p>Appuyez sur « Démarrer » puis utilisez les flèches.</p>
+          <button id="start">Démarrer</button>
+        </div>
+      </div>
+      <section class="legend">
+        <div><span class="pill pacman"></span> Pac-Man</div>
+        <div><span class="pill pellet"></span> Gomme</div>
+        <div><span class="pill ghost"></span> Fantôme</div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
