@@ -1,3 +1,14 @@
+﻿:root {
+  --bg: #060a06;
+  --panel: #0a110a;
+  --panel-2: #0d160d;
+  --line: #153515;
+  --text: #86ff77;
+  --text-dim: #4fa44a;
+  --warning: #ffe46b;
+  --danger: #ff5f5f;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,93 +16,164 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Segoe UI", system-ui, sans-serif;
-  background: radial-gradient(circle at top, #0d1b2a, #02050a);
-  color: #f5f7ff;
   display: grid;
   place-items: center;
-  padding: 32px 16px;
+  background:
+    radial-gradient(circle at 20% 20%, #123012 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, #1c2c10 0%, transparent 40%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Cascadia Mono", "IBM Plex Mono", "Consolas", monospace;
+  padding: 18px;
 }
 
-.container {
-  max-width: 720px;
-  width: 100%;
-  text-align: center;
-  display: grid;
-  gap: 16px;
+.console-shell {
+  width: min(900px, 100%);
+  border: 2px solid #1f4f1f;
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  box-shadow:
+    0 0 0 2px #0a220a,
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(61, 181, 53, 0.16);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.console-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(134, 255, 119, 0.05) 0px,
+    rgba(134, 255, 119, 0.05) 1px,
+    transparent 3px,
+    transparent 5px
+  );
+}
+
+.topbar {
+  margin-bottom: 10px;
+}
+
+.prompt {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.88rem;
 }
 
 h1 {
+  margin: 6px 0 2px;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.hud p {
   margin: 0;
-  font-size: 2.2rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #091409;
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+.hud span {
+  color: var(--warning);
 }
 
 .stage {
   position: relative;
-  width: 100%;
 }
 
 canvas {
   width: 100%;
-  border-radius: 18px;
-  background: #08131f;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
-  border: 2px solid #192a42;
+  border-radius: 10px;
+  border: 2px solid #225522;
+  background: #020502;
+  display: block;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
+  background: rgba(0, 5, 0, 0.78);
+  border-radius: 10px;
   display: grid;
   place-items: center;
-  gap: 12px;
-  padding: 24px;
   text-align: center;
-  background: rgba(4, 12, 22, 0.75);
-  border-radius: 18px;
-  font-size: 1rem;
-}
-
-.overlay button {
-  border: none;
-  border-radius: 999px;
-  padding: 10px 24px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #08131f;
-  background: #ffd93d;
-  cursor: pointer;
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.35);
+  gap: 12px;
+  padding: 16px;
 }
 
 .overlay.hidden {
   display: none;
 }
 
-.legend {
+.overlay p {
+  margin: 0;
+}
+
+.actions {
   display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-  font-size: 0.95rem;
+  gap: 10px;
 }
 
-.pill {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  margin-right: 8px;
+button {
+  border: 1px solid #2d812d;
+  background: #0f2a0f;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 9px 16px;
+  font: inherit;
+  cursor: pointer;
 }
 
-.pacman {
-  background: #ffd93d;
+button:hover {
+  background: #143414;
 }
 
-.pellet {
-  background: #f1f5ff;
+button.secondary {
+  border-color: #6f6f2b;
+  color: #ffef8d;
 }
 
-.ghost {
-  background: #ff6b6b;
+.hint {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.terminal-log {
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px;
+  background: #070d07;
+}
+
+.log-title {
+  margin: 0 0 4px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+#logLine {
+  margin: 0;
+  color: var(--warning);
+  min-height: 1.2em;
+}
+
+@media (max-width: 700px) {
+  .hud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

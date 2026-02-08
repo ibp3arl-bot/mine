@@ -1,30 +1,43 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pac-Man</title>
+    <title>PACMAN DELUXE // CONSOLE</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="container">
-      <header>
-        <h1>Pac-Man</h1>
-        <p>Utilisez les flèches pour déplacer Pac-Man.</p>
+    <main class="console-shell" aria-live="polite">
+      <header class="topbar">
+        <p class="prompt">C:\\ARCADE&gt; RUN PACMAN_DELUXE.EXE</p>
+        <h1>PACMAN DELUXE</h1>
       </header>
+
+      <section class="hud" aria-label="Informations de partie">
+        <p>SCORE <span id="score">000000</span></p>
+        <p>VIES <span id="lives">3</span></p>
+        <p>NIVEAU <span id="level">1</span></p>
+        <p>ÉTAT <span id="status">PRÊT</span></p>
+      </section>
+
       <div class="stage">
-        <canvas id="game" width="520" height="360" aria-label="Terrain Pac-Man"></canvas>
+        <canvas id="game" width="560" height="400" aria-label="Terrain Pac-Man"></canvas>
         <div id="overlay" class="overlay" role="status">
-          <p>Appuyez sur « Démarrer » puis utilisez les flèches.</p>
-          <button id="start">Démarrer</button>
+          <p id="overlayText">Appuie sur START pour lancer la partie.</p>
+          <div class="actions">
+            <button id="start">START</button>
+            <button id="restart" class="secondary">RESTART</button>
+          </div>
+          <p class="hint">Flèches/WASD: déplacer • Espace: pause</p>
         </div>
       </div>
-      <section class="legend">
-        <div><span class="pill pacman"></span> Pac-Man</div>
-        <div><span class="pill pellet"></span> Gomme</div>
-        <div><span class="pill ghost"></span> Fantôme</div>
+
+      <section class="terminal-log" aria-label="Journal système">
+        <p class="log-title">[ SYS.LOG ]</p>
+        <p id="logLine">Initialisation du labyrinthe...</p>
       </section>
     </main>
+
     <script src="script.js"></script>
   </body>
 </html>
